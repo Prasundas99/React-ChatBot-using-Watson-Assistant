@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 //  Import action
 import { userMessage, sendMessage } from "../../actions/watson";
-
 const Chat = ({ chat, userMessage, sendMessage }) => {
   // Handle Users Message
   const [message, setMessage] = useState("");

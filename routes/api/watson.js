@@ -16,7 +16,7 @@ const assistant = new AssistantV2({
   version: "2020-09-24",
   authenticator: authenticator,
   url: process.env.WATSON_ASSISTANT_URL,
-  serviceUrl: ' https://api.eu-gb.assistant.watson.cloud.ibm.com',
+  serviceUrl: " https://api.eu-gb.assistant.watson.cloud.ibm.com",
 });
 
 // 3. Route to Handle Session Tokens
@@ -27,7 +27,10 @@ router.get("/session", async (req, res) => {
     const session = await assistant.createSession({
       assistantId: process.env.WATSON_ASSISTANT_ID,
     });
-    res.json(session["result"]);
+
+    console.log(session);
+
+    res.json(session.result);
 
     // If fail
   } catch (err) {
