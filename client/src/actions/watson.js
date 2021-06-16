@@ -25,8 +25,9 @@ export const createSession = (message) => async (dispatch) => {
   try {
     const res = await axios.get("http://localhost:5000/api/watson/session");
     console.log(res.data);
-    dispatch({ type: SESSION_SUCCESS, payload: message });
+    dispatch({ type: SESSION_SUCCESS, payload: res.data });
   } catch (err) {
+    console.log(err);
     dispatch({ type: SESSION_FAIL });
   }
 };
@@ -35,7 +36,10 @@ export const createSession = (message) => async (dispatch) => {
 export const sendMessage = (message) => async (dispatch) => {
   try {
     const body = { input: message };
-    const res = await axios.post("http://localhost:5000/api/watson/message", body);  //-----------------------------------
+    const res = await axios.post(
+      "http://localhost:5000/api/watson/message",
+      body
+    );
     console.log(res);
     dispatch({
       type: MESSAGE_SUCCESS,
