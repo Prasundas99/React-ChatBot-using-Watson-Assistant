@@ -15,6 +15,7 @@ import { createSession } from "./actions/watson";
 // Import axios
 import axios from "axios";
 
+// TODO: Remove session_id from localstorage when app is closed
 if (localStorage.session) {
   // delete axios.defaults.headers.common["session_id"];
   axios.defaults.headers.common["session_id"] = localStorage.session;

@@ -5,27 +5,28 @@ import { useDispatch, useSelector } from "react-redux";
 //  Import action
 import { userMessage, sendMessage } from "../../actions/watson";
 
-const Chat = ({ chat, userMessage, sendMessage }) => {
+const Chat = () => {
   // Handle Users Message
   const [message, setMessage] = useState("");
   const endOfMessages = useRef(null);
+  const dispatch = useDispatch();
 
   const { messages: fetchMessages } = useSelector((state) => state.watson);
-  console.log("FetchMessages", fetchMessages);
 
   const scrollToBottom = () => {
     endOfMessages.current.scrollIntoView({ behavior: "smooth" });
   };
-  useEffect(scrollToBottom, [chat]);
+
+  useEffect(scrollToBottom, [fetchMessages]);
 
   //  Function that handles user submission
   const handleClick = async (e) => {
     const code = e.keyCode || e.which;
 
     if (code === 13) {
-      console.log(message);
-      userMessage(message);
-      sendMessage(message);
+      // console.log(message);
+      dispatch(userMessage(message));
+      dispatch(sendMessage(message));
       setMessage("");
     }
   };
@@ -35,9 +36,11 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
       <h1>Chatty the Chatbot</h1>
       {/* Handle Messages */}
       <div class="historyContainer">
-        {chat.length === 0
+        {fetchMessages.length === 0
           ? ""
-          : chat.map((msg) => <div className={msg.type}>{msg.message}</div>)}
+          : fetchMessages.map((msg) => (
+              <div className={msg.type}>{msg.message}</div>
+            ))}
         <div ref={endOfMessages}></div>
       </div>
       {/* Input Box */}
@@ -50,8 +53,8 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  chat: state.watson.messages,
-});
+// const mapStateToProps = (state) => ({
+//   chat: state.watson.messages,
+// });
 
-export default connect(mapStateToProps, { userMessage, sendMessage })(Chat);
+export default Chat;
