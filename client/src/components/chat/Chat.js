@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //  Import action
 import { userMessage, sendMessage } from "../../actions/watson";
+
 const Chat = ({ chat, userMessage, sendMessage }) => {
   // Handle Users Message
   const [message, setMessage] = useState("");
   const endOfMessages = useRef(null);
+
+  const { messages: fetchMessages } = useSelector((state) => state.watson);
+  console.log("FetchMessages", fetchMessages);
 
   const scrollToBottom = () => {
     endOfMessages.current.scrollIntoView({ behavior: "smooth" });
