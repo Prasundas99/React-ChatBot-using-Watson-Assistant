@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
 //  Import action
@@ -53,8 +52,5 @@ const Chat = () => {
     </div>
   );
 };
-// const mapStateToProps = (state) => ({
-//   chat: state.watson.messages,
-// });
 
 export default Chat;

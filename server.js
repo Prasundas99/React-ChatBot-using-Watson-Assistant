@@ -1,12 +1,10 @@
 // 1. Import dependencies
 const express = require("express");
-const cors = require("cors")
 const app = express();
 require("dotenv").config();
 
 // 1.1 Allow parsing on request bodies
 app.use(express.json());
-app.use(cors());
 
 // 2. Import routes for api
 const watsonRoutes = require("./routes/api/watson");
